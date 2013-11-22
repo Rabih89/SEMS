@@ -1,0 +1,39 @@
+.x-home {
+	background-image: url('images/icons/home.png') !important;
+}
+.x-search {
+	background-image: url('images/icons/search.png') !important;
+}
+.x-account {
+	background-image: url('images/icons/account.png') !important;
+}
+.x-user {
+	background-image: url('images/icons/user.png') !important;
+}
+.x-logout {
+	background-image: url('images/icons/exit.png') !important;
+}
+.x-settings {
+	background-image: url('images/icons/settings.png') !important;
+}
+.x-email {
+	background-image: url('images/icons/email.png') !important;
+}
+.x-password {
+	background-image: url('images/icons/password.png') !important;
+}
+.x-invite {
+	background-image: url('images/icons/invite.png') !important;
+}
+.x-announcement {
+	background-image: url('images/icons/announcement.png') !important;
+}
+.x-delete {
+	background-image: url('images/icons/delete.png') !important;
+}
+.x-add {
+	background-image: url('images/icons/add.png') !important;
+}
+.x-signup {
+	background-image: url('images/icons/signup.png') !important;
+}
