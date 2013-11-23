@@ -15,7 +15,8 @@ Ext.define('MyApp.controller.Main', {
         'Ext.chart.axis.Category',
         'Ext.ux.GroupTabPanel',
         'Ext.layout.container.Form',
-        'MyApp.view.main.NorthView'
+        'MyApp.view.main.NorthView',
+        'Ext.form.field.Date'
     ],
     
     views: [
