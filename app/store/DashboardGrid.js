@@ -8,13 +8,13 @@ Ext.define('MyApp.store.DashboardGrid', {
                 type: 'ajax',
                 api: {
                     create  : 'php/Events.php?action=insert',
-                    read    : 'php/Events.php?action=fetchAll'
+                    read    : 'php/Events.php?action=fetchAll',
                     update  : 'php/usuarios.php?action=update',
                     destroy : 'php/usuarios.php?action=delete'
                 },
                 actionMethods: {
                     create  : 'POST',
-                    read    : 'POST'
+                    read    : 'POST',
                     update  : 'POST',
                     destroy : 'POST'
                 },
