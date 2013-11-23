@@ -4,7 +4,7 @@ require_once 'Db/Base.php';
 
 class Events extends Base {
 
-    private     $valor = null;
+    private     $value = null;
     private     $data = null;
     protected   $table = "Event";
     
@@ -13,19 +13,21 @@ class Events extends Base {
         $data = json_decode($_POST['data']);
         
         $db = $this->getDb();
-        $stm = $db->prepare('Insert into ' . $this->getTable() . ' (Name, Location) Values(:Name, :Location)');
-        $stm->bindValue('Name', $data->Name);
+        $stm = $db->prepare('Insert into Event (Name, Location, StartDate, EndDate) VALUES (:Name, :Location, :StartDate, :EndDate)');
+        $stm->bindValue(':Name', $data->Name);
         $stm->bindValue(':Location', $data->Location);
+        $stm->bindValue(':StartDate', $data->StartDate);
+        $stm->bindValue(':EndDate', $data->EndDate);
         $stm->execute();
 
         $result = $stm->fetch(\PDO::FETCH_ASSOC);
 
         $insert = $db->lastInsertId();
         
-        $msg = $insert ? 'Registro(s) inserido(s) com sucesso' : 'Erro ao inserir o registro, tente novamente.';
+        $msg = $insert ? 'Record (s) inserted (s) successfully' : 'Error inserting record, try again.';
         
         $newData = $data;
-        $newData->id = $insert;
+        $newData->idEvent = $insert;
 
         echo json_encode(array(
             "success" => $insert,

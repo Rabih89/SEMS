@@ -102,36 +102,36 @@ abstract class Base {
 
     public function delete() {
 
-        $arrUsuarios = json_decode($_POST['data']);
+        $arrEvent = json_decode($_POST['data']);
 
-        if (is_array($arrUsuarios)) {
+        if (is_array($arrEvent)) {
 
-            foreach ($arrUsuarios as $usuario) {
+            foreach ($arrEvent as $event) {
 
-                $id = $usuario->id;
+                $id = $event->id;
 
                 $db = $this->getDb();
                 $stm = $db->prepare("delete from " . $this->table . " where id=:id");
                 $stm->bindValue(":id", $id);
-                $usuarioExcluido = $stm->execute();
+                $eventExlude = $stm->execute();
 
-                if (!$usuarioExcluido)
+                if (!$eventExclude)
                     break;
             }
         }else {
 
-            $id = $arrUsuarios->id;
+            $id = $arrEvent->id;
 
             $db = $this->getDb();
             $stm = $db->prepare("delete from " . $this->table . " where id=:id");
             $stm->bindValue(":id", $id);
-            $usuarioExcluido = $stm->execute();
+            $eventExclude = $stm->execute();
         }
 
-        $msg = $usuarioExcluido ? 'Registro(s) excluído(s) com sucesso' : 'Erro ao excluir, tente novamente.';
+        $msg = $eventExclude ? 'Record (s) deleted (s) successfully' : 'Error deleting, try again.';
 
         echo json_encode(array(
-            "success" => $usuarioExcluido,
+            "success" => $eventExclude,
             "message" => $msg
         ));
     }

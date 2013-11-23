@@ -357,12 +357,14 @@ Ext.define('MyApp.controller.Main', {
                             xtype: 'datefield',
                             name : 'StartDate',
                             fieldLabel: 'Start Date',
+                            format: 'y/m/d',
                             enableKeyEvents: true,
                             allowBlank: false
                         },{
                             xtype: 'datefield',
                             name : 'EndDate',
                             fieldLabel: 'End Date',
+                            format: 'y/m/d',
                             enableKeyEvents: true,
                             allowBlank: false
                         }],
