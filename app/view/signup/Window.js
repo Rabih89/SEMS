@@ -8,9 +8,8 @@ Ext.define('MyApp.view.signup.Window', {
 	
 	title: 'SEMS Signup',
 	iconCls: 'x-signup',
-	
 	closable: true,
-    height: 400,
+    height: 550,
     width: 400,
     modal: true,
     autoShow: true,	
@@ -35,23 +34,19 @@ Ext.define('MyApp.view.signup.Window', {
                 enableKeyEvents: true,
                 allowBlank: false
             },{
-            	xtype: 'combo',
-            	fieldLabel: 'Title',
-            	queryMode: 'local',
-            	store: Ext.create('Ext.data.Store', {
-    				fields: ['name', 'value'],
-    				data : [
-        				{"name":"Mr.", "value":"Mr"},
-        				{"name":"Mrs., "value":"Mrs"},
- 				   ]
-				})
-            },{
                 xtype: 'textfield',
                 name : 'confirmpassword',
                 fieldLabel: 'Confirm Password',
-                inputType: 'confrimpassword',
+                inputType: 'password',
                 enableKeyEvents: true,
                 allowBlank: false
+            },{
+            	xtype: 'combo',
+            	fieldLabel: 'Title',
+            	queryMode: 'local',
+            	store: ['Dr.','Prof.','Mr.','Mrs'],
+            	autoSelect:true,
+       			forceSelection:true
             },{
                 xtype: 'textfield',
                 name : 'firstname',
@@ -71,9 +66,55 @@ Ext.define('MyApp.view.signup.Window', {
                 enableKeyEvents: true,
                 allowBlank: false
             },{
+            	xtype: 'combo',
+            	fieldLabel: 'Country',
+            	queryMode: 'local',
+            	store: ['United States','Canada','Brasil','France','Germany','China']
+            },{
+            	xtype: 'combo',
+            	fieldLabel: 'Organization',
+            	queryMode: 'local',
+            	store: ['Concordia University','McGill University','ETS','Uqam']
+            },{
                 xtype: 'textfield',
                 name : 'department',
                 fieldLabel: 'Department',
+                enableKeyEvents: true,
+                allowBlank: false
+            },{
+                xtype: 'textfield',
+                name : 'address',
+                fieldLabel: 'Address',
+                enableKeyEvents: true,
+                allowBlank: false
+            },{
+                xtype: 'textfield',
+                name : 'city',
+                fieldLabel: 'City',
+                enableKeyEvents: true,
+                allowBlank: false
+            },{
+                xtype: 'textfield',
+                name : 'provencestate',
+                fieldLabel: 'Provence/State',
+                enableKeyEvents: true,
+                allowBlank: false
+            },{
+                xtype: 'textfield',
+                name : 'postalcode',
+                fieldLabel: 'Postal Code',
+                enableKeyEvents: true,
+                allowBlank: false
+            },{
+                xtype: 'textfield',
+                name : 'email',
+                fieldLabel: 'E-mail',
+                enableKeyEvents: true,
+                allowBlank: false
+            },{
+                xtype: 'textfield',
+                name : 'confirmemail',
+                fieldLabel: 'Confirm E-mail',
                 enableKeyEvents: true,
                 allowBlank: false
             }],

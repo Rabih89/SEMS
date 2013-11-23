@@ -1,11 +1,35 @@
 Ext.define('MyApp.store.DashboardGrid', {
-    extend: 'Ext.data.ArrayStore',
+    extend: 'Ext.data.Store',
     model: 'MyApp.model.DashboardGrid',
-    data: [
-        ['Phase 1 Design', '17-11-2013', '30-11-2013'],
-        ['Develop Prototype', '1-12-2013', '31-12-2013'],
-        ['Evaluation of Prototype', '5-01-2014', '30-01-2014']
-    ]   
-});
-    
 
+    autoLoad: true,
+    autoSync: false,
+	proxy: {
+                type: 'ajax',
+                api: {
+                    create  : 'php/Events.php?action=insert',
+                    read    : 'php/Events.php?action=fetchAll'
+                    update  : 'php/usuarios.php?action=update',
+                    destroy : 'php/usuarios.php?action=delete'
+                },
+                actionMethods: {
+                    create  : 'POST',
+                    read    : 'POST'
+                    update  : 'POST',
+                    destroy : 'POST'
+                },
+                reader: {
+                        type: 'json',
+                        root: 'data',
+                        rootProperty: 'data',
+                        successProperty: 'success',
+                        messageProperty: 'message'
+                },
+                writer: {
+                        type: 'json',
+                        writeAllFields: true,
+                        root: 'data',
+                        encode: true
+                }
+        }  
+});

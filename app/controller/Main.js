@@ -59,7 +59,7 @@ Ext.define('MyApp.controller.Main', {
     		 'mainviewport': {
     		 	render: this.onShowViewport
     		 },
-    		 'dashboardGrid': {
+    		 'dashboardgrid': {
     		 	cellclick: this.onDashboardGridClick
     		 },
     		 'loginwindow button[action=login]': {
@@ -67,7 +67,13 @@ Ext.define('MyApp.controller.Main', {
             },
              'button[itemId=newUserForm]': {
              	click: this.onNewUserForm
+             },
+             'dashboardgrid button[itemId=addEvent]': {
+             	click: this.onAddEvent
              }, 
+             'button[action=addEventClick]': {
+             	click: this.onAddEventClick
+             },
              'northview [action=login]': {
              	click: this.onLogin
              },
@@ -311,7 +317,89 @@ Ext.define('MyApp.controller.Main', {
     },
     
     onDashboardGridClick: function () {
-    	console.log('Grid click');
+    	var dashboardGrid = this.getDashboardGrid();
+    	var toolbar = dashboardGrid.dockedItems.items[1];
+    	for(var i = 0; i < toolbar.items.items.length; i++) {
+    		toolbar.items.items[i].setDisabled(false);
+    	}
+    },
+    
+    onAddEvent: function () {
+    	var window = Ext.create('Ext.window.Window', {
+    		title: 'Add New Event',
+    		iconCls: 'x-add',
+			closable: true,
+    		height: 200,
+    		width: 400,
+    		modal: true,
+    		autoShow: true,	
+    		layout: 'fit',
+            items: {  
+                    xtype: 'form',
+                    defaults: {
+                            anchor: '100%'
+                        },
+                    bodyPadding: 15,
+                    items: [{
+                        xtype: 'textfield',
+                        name : 'Name',
+                        fieldLabel: 'Event Name',
+                        enableKeyEvents: true,
+                        allowBlank: false
+                        },{
+                            xtype: 'textfield',
+                            name : 'Location',
+                            fieldLabel: 'Event Location',
+                            enableKeyEvents: true,
+                            allowBlank: false
+                        },{
+                            xtype: 'datefield',
+                            name : 'StartDate',
+                            fieldLabel: 'Start Date',
+                            enableKeyEvents: true,
+                            allowBlank: false
+                        },{
+                            xtype: 'datefield',
+                            name : 'EndDate',
+                            fieldLabel: 'End Date',
+                            enableKeyEvents: true,
+                            allowBlank: false
+                        }],
+                    buttons : [{
+                    	text: 'Add Event',
+                    	action: 'addEventClick',
+                    	disabled: true,
+                    	formBind: true
+                	}]
+                    }
+		}).show();
+    },
+    onAddEventClick: function(btn) {
+    	var me = this,
+    	window = btn.up('window'),
+    	form = window.down('form'),
+     	basicForm = form.getForm(),
+        grid = me.getDashboardGrid(),  
+        store = grid.getStore(),
+        record = basicForm.getRecord(),
+        values = basicForm.getValues();
+    	console.log(window,form, basicForm, grid, store, record, values);
+        if(basicForm.isValid()){
+                        if(!record){
+                                record = Ext.create('MyApp.model.DashboardGrid');
+                                record.set(values);
+                                store.add(record);
+                        }else{
+                                record.set(values);
+                        }
+
+                        store.sync();
+                        window.close();
+
+                }else{
+                        Ext.Msg.alert('Error', 'Form filled out incorrectly');
+                }                
+    	//console.log(btn.up('window').down('form'));//items.items[0].items.items);
     }
      
 });

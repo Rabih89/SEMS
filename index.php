@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<?php include 'connectDatabase.php'; ?>
+<!-- <?php include 'connectDatabase.php'; ?> -->
 <head>
     <meta charset="UTF-8">
     <title>SEMS</title>

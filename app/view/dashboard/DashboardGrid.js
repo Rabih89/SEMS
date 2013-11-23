@@ -3,12 +3,13 @@ Ext.define('MyApp.view.dashboard.DashboardGrid', {
     alias: 'widget.dashboardgrid',
     
     requires: [
-      'MyApp.store.DashboardGrid'
+      'MyApp.store.DashboardGrid',
+      'Ext.toolbar.Paging'
     ],
     
 	title: 'Dashboard',
-
-    //store: Ext.StoreMgr.lookup('DashboardGrid'),//store: 'DashboardGrid',
+	store: 'DashboardGrid',
+	
     initComponent: function(){ 
 		this.dockedItems = [{
         	xtype: 'toolbar',
@@ -16,25 +17,35 @@ Ext.define('MyApp.view.dashboard.DashboardGrid', {
     		items: [{	xtype: 'button', 
         		  	  	text: 'Add Event', 
         		  	  	iconCls: 'x-add',
+        		  	  	itemId: 'addEvent',
         		  	  	disabled: true
         			}, {
         		  	  	xtype: 'button', 
         		  	  	text: 'Delete Event', 
         		  	  	iconCls: 'x-delete',
+        		  	  	itemId: 'deleteEvent',
         		  	  	disabled: true	
         			}]
+        }, {
+        	xtype: 'pagingtoolbar',
+            store: 'DashboardGrid',
+            dock: 'bottom',
+            displayInfo: true
         }];
- 		this.store = 'DashboardGrid';
+
  		this.columns = [{ 
         	text: 'Event', 
-            dataIndex: 'event',
+            dataIndex: 'Name',
             flex: 1
+            },{
+            text: 'location',
+            dataIndex: 'Location'
             },{ 
             text: 'Start Date',  
-            dataIndex: 'startDate'
+            dataIndex: 'StartDate'
             },{ 
             text: 'End Date', 
-            dataIndex: 'endDate'
+            dataIndex: 'EndDate'
         }];
 		this.callParent(arguments);
     }
