@@ -24,17 +24,20 @@ Ext.define('MyApp.controller.Main', {
         'Viewport',
         'Main',
         'dashboard.TreeList',
-        'dashboard.DashboardGrid'
+        'dashboard.DashboardGrid',
+        'main.announcements'
     ],
     
     stores: [
     	'TreeList',
-    	'DashboardGrid'
+    	'DashboardGrid',
+    	'announcements'
     ],
     
     models: [
     	'TreeList',
-    	'DashboardGrid'
+    	'DashboardGrid',
+    	'announcements'
     ],
     
     refs: [
@@ -72,6 +75,12 @@ Ext.define('MyApp.controller.Main', {
              'dashboardgrid button[itemId=addEvent]': {
              	click: this.onAddEvent
              }, 
+            'dashboardgrid button[itemId=deleteEvent]': {
+             	click: this.onDeleteEvent
+             }, 
+             'dashboardgrid button[itemId=editEvent]': {
+             	click: this.onEditEvent
+             },
              'button[action=addEventClick]': {
              	click: this.onAddEventClick
              },
@@ -313,6 +322,7 @@ Ext.define('MyApp.controller.Main', {
 		    }
 	       });  
     },
+    // REMOVE ME!!!
     onNewUserForm: function () {
     	console.log('New user updated!');
     },
@@ -386,7 +396,6 @@ Ext.define('MyApp.controller.Main', {
         store = grid.getStore(),
         record = basicForm.getRecord(),
         values = basicForm.getValues();
-    	console.log(window,form, basicForm, grid, store, record, values);
         if(basicForm.isValid()){
                         if(!record){
                                 record = Ext.create('MyApp.model.DashboardGrid');
@@ -402,7 +411,45 @@ Ext.define('MyApp.controller.Main', {
                 }else{
                         Ext.Msg.alert('Error', 'Form filled out incorrectly');
                 }                
-    	//console.log(btn.up('window').down('form'));//items.items[0].items.items);
+    },
+    
+    onDeleteEvent: function(btn) {
+        var grid = btn.up('toolbar').up('dashboardgrid');
+        var store = grid.getStore();
+        var records = grid.getSelectionModel().getSelection();
+    	var selected = grid.getSelectionModel().selected;
+    	var eventSelected = selected.items.length;
+    	if(eventSelected===1) {
+            Ext.Msg.show({
+                title : 'Confirmation',
+                msg : 'Are you sure you want to delete "' + records[0].data.Name + '" ?',
+                buttons : Ext.Msg.YESNO,
+                icon : Ext.MessageBox.WARNING,
+                scope : this,
+                width : 450,
+                fn : function(btn, ev){
+                    if (btn === 'yes') {
+                        store.remove(records);
+                        store.sync();
+                    }
+                }
+            });
+        }
+    	else {
+    		Ext.Msg.alert('Error', 'Please select an event to delete.', Ext.emptyFn);
+    	}
+    },
+    onEditEvent: function (btn) {
+        var grid = btn.up('toolbar').up('dashboardgrid');
+        var store = grid.getStore();
+        var records = grid.getSelectionModel().getSelection();
+    	var selected = grid.getSelectionModel().selected;
+    	var eventSelected = selected.items.length;
+    	if(eventSelected===1) {
+    		console.log('doEdit');
+    	}
+    	else {
+    		Ext.Msg.alert('Error', 'Please select an event to edit.', Ext.emptyFn);
+    	}
     }
-     
 });

@@ -39,7 +39,6 @@ Ext.define('MyApp.view.main.NorthView' ,{
         }, '->',{
             xtype: 'button',
             text: 'Guest',
-            //text: Helix.data.proxy.resource.name,
             iconCls: 'x-user',
             menu: [{
                 text: 'Sign-in',

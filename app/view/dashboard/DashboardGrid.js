@@ -9,23 +9,29 @@ Ext.define('MyApp.view.dashboard.DashboardGrid', {
     
 	title: 'Dashboard',
 	store: 'DashboardGrid',
-	
+
     initComponent: function(){ 
-		this.dockedItems = [{
-        	xtype: 'toolbar',
-    		dock: 'top',
-    		items: [{	xtype: 'button', 
-        		  	  	text: 'Add Event', 
-        		  	  	iconCls: 'x-add',
-        		  	  	itemId: 'addEvent',
-        		  	  	disabled: true
-        			}, {
-        		  	  	xtype: 'button', 
-        		  	  	text: 'Delete Event', 
-        		  	  	iconCls: 'x-delete',
-        		  	  	itemId: 'deleteEvent',
-        		  	  	disabled: true	
-        			}]
+	this.dockedItems = [{
+            xtype: 'toolbar',
+            dock: 'top',
+            items: [{	xtype: 'button', 
+       	  	  	text: 'Add Event', 
+     	  	  	iconCls: 'x-add',
+      	  	  	itemId: 'addEvent',
+     		    	disabled: false
+                    }, {
+        		xtype: 'button', 
+        		text: 'Edit Event', 
+        		iconCls: 'x-edit',
+        		itemId: 'editEvent',
+        		disabled: true	
+                    }, {
+        		xtype: 'button', 
+        		text: 'Delete Event', 
+        		iconCls: 'x-delete',
+        		itemId: 'deleteEvent',
+        		disabled: true	
+            }]
         }, {
         	xtype: 'pagingtoolbar',
             store: 'DashboardGrid',
@@ -37,6 +43,13 @@ Ext.define('MyApp.view.dashboard.DashboardGrid', {
         	text: 'Event', 
             dataIndex: 'Name',
             flex: 1
+            }, { 
+        	text: 'News', 
+            dataIndex: 'News',
+            flex: 1
+            },{ 
+        	text: 'id', 
+            dataIndex: 'idEvent'
             },{
             text: 'location',
             dataIndex: 'Location'

@@ -34,6 +34,9 @@
 .x-add {
 	background-image: url('images/icons/add.png') !important;
 }
+.x-edit {
+	background-image: url('images/icons/edit.png') !important;
+},
 .x-signup {
 	background-image: url('images/icons/signup.png') !important;
 }

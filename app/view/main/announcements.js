@@ -4,25 +4,29 @@ Ext.define('MyApp.view.main.announcements', {
     alias: 'widget.announcements',
     
     requires: [
-     //'MyApp.model.announcements',
-     //'MyApp.store.announcements'
+    	'MyApp.store.announcements'
     ],
     
 	title: 'Announcements',
 	iconCls: 'x-announcement',
-    width: 200,
+    width: 350,
     height: 150,
-    //store: this.store,
-    initComponent: function(){ 
+    store: 'announcements',
+    initComponent: function(){
+    	this.dockedItems = [{ 
+        	xtype: 'pagingtoolbar',
+            store: 'announcements',
+            dock: 'bottom',
+            displayInfo: true
+        }];
     	this.columns = [{
-    	    text: 'Announcement', 
-            dataIndex: 'announcement' ,
-            flex: 1
-    	},{
     	    text: 'User', 
-            dataIndex: 'user' 
-    	}]
- 		//this.store = 'TreeList';
+            dataIndex: 'User_idUser'
+    	},{
+    	    text: 'Announcement', 
+            dataIndex: 'Description',
+        	flex: 1
+    	}];
 		this.callParent(arguments);
     }
     

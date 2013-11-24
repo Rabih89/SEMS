@@ -74,20 +74,14 @@ abstract class Base {
 		$start = $_POST['start'];
         $limit = $_POST['limit'];
 
-        //$sort = $_POST['sort'] ? $_POST['sort'] : 'name';
-        //$dir = $_POST['dir']? $_POST['dir'] : 'ASC';
-        //$order = $sort . ' ' . $dir;
-        
         $db = $this->getDb();
         
-        $sql = "select * from " . $this->getTable() . " order by :order";
+        $sql = "select * from " . $this->getTable();
         
         if($start !== null && $start !== '' && $limit !== null && $limit !== ''){
             $sql .= " LIMIT " . $start . " , " . $limit;
         }
-        
         $stm = $db->prepare($sql);
-        $stm->bindValue(":order", null);
         $stm->execute();
         
         $sql = "SELECT COUNT(*) AS total FROM " . $this->getTable();
@@ -108,11 +102,11 @@ abstract class Base {
 
             foreach ($arrEvent as $event) {
 
-                $id = $event->id;
+                $id = $event->idEvent;
 
                 $db = $this->getDb();
-                $stm = $db->prepare("delete from " . $this->table . " where id=:id");
-                $stm->bindValue(":id", $id);
+                $stm = $db->prepare("delete from " . $this->table . " where idEvent=:idEvent");
+                $stm->bindValue(":idEvent", $id);
                 $eventExlude = $stm->execute();
 
                 if (!$eventExclude)
@@ -120,11 +114,11 @@ abstract class Base {
             }
         }else {
 
-            $id = $arrEvent->id;
+            $id = $arrEvent->idEvent;
 
             $db = $this->getDb();
-            $stm = $db->prepare("delete from " . $this->table . " where id=:id");
-            $stm->bindValue(":id", $id);
+            $stm = $db->prepare("delete from Event where idEvent=:idEvent");
+            $stm->bindValue(":idEvent", $id);
             $eventExclude = $stm->execute();
         }
 
